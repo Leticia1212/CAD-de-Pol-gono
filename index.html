@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CAD de Polígono</title>
+</head>
+<body>
+
+  <div style="margin-top: 20px; display: flex; justify-content: center;">
+    <h3 style="color: rgb(0, 2, 129);">CAD de Polígono</h3>
+    <br>
+  </div>
+
+  <!-- ideia que tiveram em sala, de colocar alinhado o canva na tela  --> 
+  <body style="margin: 0; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+  <canvas id="gl-canvas" width="512" height="512" style="border: 2px solid rgb(0, 3, 155);"></canvas>
+
+  <div style="margin-top: 20px; display: flex; justify-content: center;">
+    <button style="color: rgb(0, 2, 129);" id="fechar">Fechar</button>
+  </div>
+  
+
+  <script id="fragment-shader" type="x-shader/x-fragment">
+    #version 300 es
+    precision highp float;
+    in vec4 fColor;
+    out vec4 Color;
+    void main() {
+      Color = fColor;
+    }
+  </script>
+
+  <script id="vertex-shader" type="x-shader/x-vertex">
+    #version 300 es
+    in vec4 aPosition;
+    in vec4 aColor;
+    out vec4 fColor;
+    void main()
+    {
+      gl_PointSize = 4.0;//para visualizar qual a cor do ponto, antes de fechar
+      fColor = aColor;
+      gl_Position = aPosition;
+    }
+  </script>
+    
+  <script src="initShaders.js"></script>
+  <script src="MV.js"></script>
+  <script src="cad.js"></script>
+</body>
+
+</html>
